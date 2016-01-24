@@ -30,7 +30,10 @@ function runKarma(configFilePath, options, cb) {
 }
 
 /** actual tasks */
-
+gulp.task("build", function() {
+  gulp.src("./src/**")
+    .pipe(gulp.dest("./app"));
+});
 /** single run */
 gulp.task('test', function(cb) {
 	runKarma('karma.conf.js', {
@@ -56,4 +59,4 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task('default', ['connect']);
+gulp.task('default', ['build', 'connect']);
