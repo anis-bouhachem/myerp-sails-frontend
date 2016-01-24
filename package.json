@@ -19,6 +19,7 @@
   "homepage": "https://github.com/anis-bouhachem/myerp-sails-frontend#readme",
   "dependencies": {
     "gulp": "^3.9.0",
+    "gulp-clean": "^0.3.1",
     "gulp-connect": "^2.3.1",
     "gulp-rename": "^1.2.2",
     "gulp-sass": "^2.1.1",

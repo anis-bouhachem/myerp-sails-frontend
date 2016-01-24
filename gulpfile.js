@@ -1,6 +1,7 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var rename = require('gulp-rename');
+var clean = require('gulp-clean');
 var path = require('path');
 var karma = require('karma');
 var connect = require('gulp-connect');
@@ -54,6 +55,14 @@ gulp.task('sass:doc', function () {
     .pipe(sassdoc({dest : config.doc + "/scss"}));
 });
 
+
+
+gulp.task('clean', function () {
+	gulp.src(config.dest, {read: false})
+		.pipe(clean());
+});
+
+
 gulp.task("build", function() {
   gulp.src(config.src + "/**")
     .pipe(gulp.dest(config.dest));
@@ -88,4 +97,5 @@ gulp.task("doc", ['sass:doc'], function () {
     .pipe(rename("index.html"))
     .pipe(gulp.dest(config.dest + "/docs"));
 });
-gulp.task('default', ['build', 'doc','connect']);
+
+gulp.task('default', ['clean', 'build', 'doc','connect']);
