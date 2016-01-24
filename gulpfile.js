@@ -3,9 +3,15 @@ var gutil = require('gulp-util');
 var path = require('path');
 var karma = require('karma');
 var connect = require('gulp-connect');
+var sass = require('gulp-sass');
+var sassdoc = require('sassdoc');
+
 
 var config = {
-  env : process.env.NODE_ENV || "development"
+  env : process.env.NODE_ENV || "development",
+  src : "./src",
+  dest : "./app",
+  doc : "./app/docs"
 }
 
 var karmaParseConfig = require('karma/lib/config').parseConfig;
@@ -30,9 +36,26 @@ function runKarma(configFilePath, options, cb) {
 }
 
 /** actual tasks */
+
+
+gulp.task('sass', function () {
+  gulp.src(config.src + '/**/*.scss')
+    .pipe(sass().on('error', sass.logError))
+    .pipe(gulp.dest(config.dest + "/css"));
+});
+
+gulp.task('sass:watch', function () {
+  gulp.watch(config.src + '/**/*.scss', ['sass']);
+});
+
+gulp.task('sass:doc', function () {
+  return gulp.src(config.src + '/**/*.scss')
+    .pipe(sassdoc({dest : config.doc + "/sass"}));
+});
+
 gulp.task("build", function() {
-  gulp.src("./src/**")
-    .pipe(gulp.dest("./app"));
+  gulp.src(config.src + "/**")
+    .pipe(gulp.dest(config.dest));
 });
 /** single run */
 gulp.task('test', function(cb) {
@@ -53,10 +76,11 @@ gulp.task('test-dev', function(cb) {
 
 gulp.task('connect', function() {
   connect.server({
-    root: 'app',
+    root: config.dest,
     port : process.env.PORT || 8080,
     livereload: config.env.NODE_ENV === "development"
   });
 });
 
-gulp.task('default', ['build', 'connect']);
+gulp.task("doc", ['sass:doc']);
+gulp.task('default', ['build', 'doc','connect']);

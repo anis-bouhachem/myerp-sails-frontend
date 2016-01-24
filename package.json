@@ -20,12 +20,14 @@
   "dependencies": {
     "gulp": "^3.9.0",
     "gulp-connect": "^2.3.1",
+    "gulp-sass": "^2.1.1",
     "gulp-util": "^3.0.7",
     "jasmine-core": "^2.4.1",
     "karma": "^0.13.19",
     "karma-jasmine": "^0.3.6",
     "karma-phantomjs-launcher": "^0.2.3",
     "path": "^0.12.7",
-    "phantomjs": "^1.9.19"
+    "phantomjs": "^1.9.19",
+    "sassdoc": "^2.1.20"
   }
 }

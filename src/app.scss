@@ -1,0 +1,8 @@
+/// @param {String} $color (bar) - Baz.
+@function whiten($color, $percentage: 50%) {
+  @return mix($color, white, $percentage);
+}
+
+body {
+  background: whiten(gray);
+}
