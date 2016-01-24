@@ -1,0 +1,23 @@
+{
+  "name": "myerp-sails-frontend",
+  "version": "0.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anis-bouhachem/myerp-sails-frontend.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/anis-bouhachem/myerp-sails-frontend/issues"
+  },
+  "homepage": "https://github.com/anis-bouhachem/myerp-sails-frontend#readme",
+  "dependencies": {
+    "gulp": "^3.9.0",
+    "gulp-util": "^3.0.7"
+  }
+}

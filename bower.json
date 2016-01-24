@@ -1,0 +1,16 @@
+{
+  "name": "myerp-sails-frontend",
+  "version": "0.0.0",
+  "homepage": "https://github.com/anis-bouhachem/myerp-sails-frontend",
+  "authors": [
+    "Anis BOUHACHEM <anis.bouhachem@yahoo.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
