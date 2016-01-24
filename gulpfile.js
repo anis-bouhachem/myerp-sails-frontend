@@ -1,5 +1,6 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
+var rename = require('gulp-rename');
 var path = require('path');
 var karma = require('karma');
 var connect = require('gulp-connect');
@@ -50,7 +51,7 @@ gulp.task('sass:watch', function () {
 
 gulp.task('sass:doc', function () {
   return gulp.src(config.src + '/**/*.scss')
-    .pipe(sassdoc({dest : config.doc + "/sass"}));
+    .pipe(sassdoc({dest : config.doc + "/scss"}));
 });
 
 gulp.task("build", function() {
@@ -82,5 +83,9 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task("doc", ['sass:doc']);
+gulp.task("doc", ['sass:doc'], function () {
+  gulp.src("./files/docs-index.html")
+    .pipe(rename("index.html"))
+    .pipe(gulp.dest(config.dest + "/docs"));
+});
 gulp.task('default', ['build', 'doc','connect']);
