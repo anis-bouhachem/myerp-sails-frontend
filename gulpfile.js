@@ -1,7 +1,6 @@
 var gulp = require('gulp');
 var gutil = require('gulp-util');
 var rename = require('gulp-rename');
-var clean = require('gulp-clean');
 var path = require('path');
 var karma = require('karma');
 var connect = require('gulp-connect');
