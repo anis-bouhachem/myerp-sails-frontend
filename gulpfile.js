@@ -7,7 +7,11 @@ var karma = require('karma');
 var connect = require('gulp-connect');
 var sass = require('gulp-sass');
 var sassdoc = require('sassdoc');
+var gulpDocs = require('gulp-ngdocs');
+var runSequence = require('run-sequence');
+var del = require('del');
 
+var pkg = require('./package.json');
 
 var config = {
   env : process.env.NODE_ENV || "development",
@@ -55,11 +59,26 @@ gulp.task('sass:doc', function () {
     .pipe(sassdoc({dest : config.doc + "/scss"}));
 });
 
+gulp.task('ngdocs', [], function () {
+  var options = {
+    scripts: [config.src + "/app.js"],
+    html5Mode: false,
+    startPage: '/api',
+    title: "Documentation : " + pkg.name,
+    titleLink: "/docs/ng",
+    api: {
+      api: true,
+      title: 'API Documentation'
+    }
+  };
+  return gulp.src(config.src + "/**/*.js")
+    .pipe(gulpDocs.process(options))
+    .pipe(gulp.dest(config.doc + '/ng'));
+});
 
 
 gulp.task('clean', function () {
-	gulp.src(config.dest, {read: false})
-		.pipe(clean());
+	return del(config.dest);
 });
 
 
@@ -92,10 +111,16 @@ gulp.task('connect', function() {
   });
 });
 
-gulp.task("doc", ['sass:doc'], function () {
+gulp.task("doc", ['sass:doc', 'ngdocs'], function () {
   gulp.src("./files/docs-index.html")
     .pipe(rename("index.html"))
     .pipe(gulp.dest(config.dest + "/docs"));
 });
 
-gulp.task('default', ['clean', 'build', 'doc','connect']);
+gulp.task('default', function (callback) {
+  runSequence('clean',
+              'build',
+              'doc',
+              'connect',
+              callback);
+});
