@@ -10,10 +10,9 @@ var config = {
 gulp.task('connect', function() {
   connect.server({
     root: 'app',
+    port : process.env.PORT || 8080,
     livereload: config.env.NODE_ENV === "development"
   });
 });
 
-gulp.task('default', function() {
-  gutil.log("Default gulp task");
-});
+gulp.task('default', ['connect']);
